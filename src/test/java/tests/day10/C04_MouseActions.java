@@ -6,9 +6,9 @@ import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import utilities.TestBase;
-public class C04_MouseActions2 extends TestBase {
+public class C04_MouseActions extends TestBase {
     @Test
-    public void test(){
+    public void test() throws InterruptedException {
         //Yeni bir class olusturalim: D14_MouseActions2
         //1- https://demoqa.com/droppable adresine gidelim
         driver.get("https://demoqa.com/droppable");
@@ -22,5 +22,6 @@ public class C04_MouseActions2 extends TestBase {
         String actualDroppedyazisi=droppedYazisi.getText();
         String expectedDroppedYazisi="Dropped!";
         Assert.assertEquals(actualDroppedyazisi,expectedDroppedYazisi,"dropped yazisi beklenenden farkli");
+        Thread.sleep(3000);
     }
 }
