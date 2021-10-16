@@ -10,35 +10,36 @@ import utilities.TestBase;
 
 public class Homework2 extends TestBase {
 
-    //1- https://www.facebook.com adresine gidelim
+    //1- https://www.facebook.com adresine gidelim <a role="button" class="_42ft _4jy0 _6lti _4jy6 _4jy2 selected _51sy" href="#" ajaxify="/reg/spotlight/" id="u_0_2_2H" data-testid="open-registration-form-button" rel="async">Create New Account</a>
     @Test
     public void test() throws InterruptedException {
-        driver.get("https://www.facebook.com ");
-        //2- Yeni hesap olustur butonuna basalim
+        driver.get("https://www.facebook.com/");
+        Thread.sleep(1000);
         driver.findElement(By.linkText("Create New Account")).click();
-        //3- Ad, soyad, mail ve sifre kutularina deger yazalim ve kaydol tusuna basalim
-        Actions actions=new Actions(driver);
+        Thread.sleep(2000);
         WebElement name= driver.findElement(By.xpath("//input[@class='inputtext _58mg _5dba _2ph-']"));
+        Actions actions= new Actions(driver);
         name.sendKeys("ferudun");
-
-        actions.sendKeys(Keys.TAB).
+        WebElement genderswoman = driver.findElement(By.xpath("//input[@value = '1']"));
+        WebElement gendersman = driver.findElement(By.xpath("//input[@value = '2']"));
+        Thread.sleep(2000);
+        actions.
+                sendKeys(Keys.TAB).
                 sendKeys("göğüş").
                 sendKeys(Keys.TAB).
-                sendKeys("55555555").
+                sendKeys("51565").
                 sendKeys(Keys.TAB).
-                sendKeys("123").
+                sendKeys("12345").
                 sendKeys(Keys.TAB).
-                sendKeys(Keys.TAB).click().sendKeys(Keys.ARROW_DOWN).
                 sendKeys(Keys.TAB).
-                sendKeys(Keys.TAB).click().sendKeys(Keys.ARROW_DOWN).
+                click().
+                sendKeys(Keys.ARROW_UP).
                 sendKeys(Keys.TAB).
-                sendKeys(Keys.TAB).click().sendKeys(Keys.ARROW_DOWN).
+                sendKeys(Keys.ARROW_DOWN).
                 sendKeys(Keys.TAB).
-                sendKeys(Keys.TAB).click().
-                sendKeys(Keys.ARROW_RIGHT).
+                sendKeys(Keys.ARROW_UP).
+                sendKeys(Keys.TAB).doubleClick(gendersman).
                 perform();
-        Thread.sleep(5000);
-
-
+        Thread.sleep(2000);
     }
 }
