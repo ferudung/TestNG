@@ -14,6 +14,7 @@ public class Homework2 extends TestBase {
     @Test
     public void test() throws InterruptedException {
         driver.get("https://www.facebook.com/");
+
         Thread.sleep(1000);
         driver.findElement(By.linkText("Create New Account")).click();
         Thread.sleep(2000);
