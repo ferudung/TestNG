@@ -22,8 +22,6 @@ public class Homework1 extends TestBase {
         softAssert.assertTrue(sonucYazisi.isDisplayed());
         //5. Enable butonuna tıklayın ve textbox etkin oluncaya kadar bekleyin
         sonucYazisi.click();
-        // WebElement yaziLocateIleBirlikt= wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//p[@id='message']")));
-        //        Assert.assertTrue(yaziLocateIleBirlikt.isDisplayed());
         WebDriverWait wait=new WebDriverWait(driver,20);
         WebElement waitText=wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"input-example\"]/input")));
         Assert.assertTrue(waitText.isDisplayed());
