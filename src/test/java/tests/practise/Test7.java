@@ -8,66 +8,64 @@ import org.testng.annotations.Test;
 import utilities.TestBase;
 
 public class Test7 extends TestBase {
+        @Test
+        public void test() throws InterruptedException {
+                // 1) "http://automationpractice.com/" ADRESiNE GiDiN
+                driver.get("http://automationpractice.com/");
 
-    @Test
-    public void test() throws InterruptedException {
+                // 2) 2. URUNUN UZERiNE GELiP Add to chart YAPIN
 
-            // 1) "http://automationpractice.com/" ADRESiNE GiDiN
-            driver.get("http://automationpractice.com/");
+                Actions actions = new Actions(driver);
 
-            // 2) 2. URUNUN UZERiNE GELiP Add to chart YAPIN
+                Thread.sleep(3000);
+                WebElement birinciUrun = driver.findElement(By.xpath("//img[@title='Blouse']"));
+                actions.moveToElement(birinciUrun).perform();
 
-            Actions actions = new Actions(driver);
+                driver.findElement(By.xpath("(//*[text()='Add to cart'])[2]")).click();
+                driver.findElement(By.xpath("//span[@title='Continue shopping']")).click();
 
-            Thread.sleep(3000);
-            WebElement birinciUrun = driver.findElement(By.xpath("//img[@title='Blouse']"));
-            actions.moveToElement(birinciUrun).perform();
+                // 3) 4. URUNUN UZERiNE GELiP Add to chart YAPIN
 
-            driver.findElement(By.xpath("(//*[text()='Add to cart'])[2]")).click();
-            driver.findElement(By.xpath("//span[@title='Continue shopping']")).click();
+                Thread.sleep(3000);
+                WebElement ikinciUrun = driver.findElement(By.xpath("(//img[@title='Printed Dress'])[2]"));
+                actions.moveToElement(ikinciUrun).perform();
 
-            // 3) 4. URUNUN UZERiNE GELiP Add to chart YAPIN
+                driver.findElement(By.xpath("(//*[text()='Add to cart'])[4]")).click();
+                driver.findElement(By.xpath("//span[@title='Continue shopping']")).click();
 
-            Thread.sleep(3000);
-            WebElement ikinciUrun = driver.findElement(By.xpath("(//img[@title='Printed Dress'])[2]"));
-            actions.moveToElement(ikinciUrun).perform();
+                // 4) 5. URUNUN UZERiNE GELiP Add to chart YAPIN
 
-            driver.findElement(By.xpath("(//*[text()='Add to cart'])[4]")).click();
-            driver.findElement(By.xpath("//span[@title='Continue shopping']")).click();
+                Thread.sleep(3000);
+                WebElement ucuncuUrun = driver.findElement(By.xpath("(//img[@title='Printed Summer Dress'])[1]"));
+                actions.moveToElement(ucuncuUrun).perform();
 
-            // 4) 5. URUNUN UZERiNE GELiP Add to chart YAPIN
+                driver.findElement(By.xpath("(//*[text()='Add to cart'])[5]")).click();
+                driver.findElement(By.xpath("//span[@title='Continue shopping']")).click();
 
-            Thread.sleep(3000);
-            WebElement ucuncuUrun = driver.findElement(By.xpath("(//img[@title='Printed Summer Dress'])[1]"));
-            actions.moveToElement(ucuncuUrun).perform();
+                // 5) CHART a gelin 3 ürün olduğunu doğrulayın
 
-            driver.findElement(By.xpath("(//*[text()='Add to cart'])[5]")).click();
-            driver.findElement(By.xpath("//span[@title='Continue shopping']")).click();
+                String actualUrunSayisi =
+                        driver.findElement(By.xpath("//span[@class='ajax_cart_quantity unvisible']")).getText();
+                String expectedUrunSayisi = "3";
+                System.out.println(actualUrunSayisi);
 
-            // 5) CHART a gelin 3 ürün olduğunu doğrulayın
+                Assert.assertEquals(actualUrunSayisi, expectedUrunSayisi, "URUN SAYISI HATALI");
 
-            String actualUrunSayisi =
-                    driver.findElement(By.xpath("//span[@class='ajax_cart_quantity unvisible']")).getText();
-            String expectedUrunSayisi = "3";
-            System.out.println(actualUrunSayisi);
+                // 6) CHART'A GELiP Chek out TIKLAYIN
 
-            Assert.assertEquals(actualUrunSayisi, expectedUrunSayisi, "URUN SAYISI HATALI");
+                WebElement chart = driver.findElement(By.xpath("//a[@title='View my shopping cart']"));
+                actions.moveToElement(chart).perform();
 
-            // 6) CHART'A GELiP Chek out TIKLAYIN
+                driver.findElement(By.xpath("//a[@title='Check out']")).click();
 
-            WebElement chart = driver.findElement(By.xpath("//a[@title='View my shopping cart']"));
-            actions.moveToElement(chart).perform();
+                // 7) TOPLAM ALISVERiS MiKTARININ 108.97 OLDUGUNU DOGRULA
 
-            driver.findElement(By.xpath("//a[@title='Check out']")).click();
+                WebElement totalPrice = driver.findElement(By.xpath("//span[@id='total_price']"));
+                String actualPrice = totalPrice.getText();
+                String expectedPrice = "$108.97";
 
-            // 7) TOPLAM ALISVERiS MiKTARININ 108.97 OLDUGUNU DOGRULA
+                System.out.println("ALISVERiS TOPLAMI : " + totalPrice.getText());
 
-            WebElement totalPrice = driver.findElement(By.xpath("//span[@id='total_price']"));
-            String actualPrice = totalPrice.getText();
-            String expectedPrice = "$108.97";
-
-            System.out.println("ALISVERiS TOPLAMI : " + totalPrice.getText());
-
-            Assert.assertEquals(actualPrice, expectedPrice, "PRiCE HATALI");
+                Assert.assertEquals(actualPrice, expectedPrice, "PRiCE HATALI");
         }
 }
